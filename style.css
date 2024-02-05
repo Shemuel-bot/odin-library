@@ -1,13 +1,21 @@
+@font-face {
+    font-family: main-font;
+    src: url(Fonts/Roboto_Condensed/static/RobotoCondensed-Regular.ttf);
+   
+}
 body{
     display: flex;
     justify-content: flex-start;
+    font-family: main-font, Georgia, 'Times New Roman', Times, serif;
+    background-color: #cbd5e1;
 }
 .container{
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 10px;
     height: 100vh;
-    background-color: rgba(185, 185, 185, 0.521);
+    background-color: rgba(255, 255, 255, 0.521);
     box-shadow: 8px 0px 10px rgba(165, 165, 165, 0.486);
     padding-right: 20px;
 }
@@ -19,10 +27,49 @@ ul{
 li{
     display: flex;
 }
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    background-color: rgb(255, 255, 255);
+    height: 70vh;
+    width: 40vw;
+    margin-left: 25vw;
+    margin-top: 15vh;
+    border-radius: 15px;
+    box-shadow: 0px 10px 10px rgba(161, 161, 161, 0.486);
+}
+input{
+   border-style: none;
+   background-color: #e2e8f0; 
+   height: 25px;
+   border-radius: 10px;
+   text-indent: 10px;
+   box-shadow: 0px 5px 10px rgba(150, 150, 150, 0.521);
+}
+button
+{
+    width: 150px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #fecaca;
+    border-style: none;
+    font-size: larger;
+    margin-top: 10px;
+    box-shadow: 5px 10px 10px rgba(168, 168, 168, 0.452);
+}
+button:hover
+{
+    background-color: #eec3c3;
+}
 .book{
-    background-color: white;
+    background-color: #cbd5e1;
     flex-grow: 1;
+    font-size: larger;
     border-radius: 8px;
+    padding: 5px;
     box-shadow: 0px 8px 10px rgba(155, 155, 155, 0.568);
     
 }
