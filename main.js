@@ -66,4 +66,5 @@ function AddForm(){
 
 addBookButton.addEventListener('click', ()=>{
     AddForm();
+    addBookButton.removeEventListener('click', true);
 });
