@@ -1,6 +1,9 @@
 const addBookButton = document.querySelector('.add-book');
 const myLibrary = [];
 
+
+
+
 function Book(title, author, pages, read){
     this.listItem = document.createElement('li');
     document.querySelector('ul').appendChild(this.listItem);
@@ -15,20 +18,24 @@ function Book(title, author, pages, read){
 
     for (let index = 0; index < 3; index++) {
         this.para = document.createElement('p');
+        this.bookDiv.appendChild(this.para);
         switch (index) {
             case 0:this.para.textContent='Author: '+author;break;
             case 1:this.para.textContent='Number of pages: '+pages;break;
-            case 2:read.checked?this.para.textContent='Read':this.para.textContent='Have not read';
+            case 2:read.checked?this.para.textContent='Read':this.para.textContent='Have not read'; 
+            this.para.id=title; AddStatusButton(read, title);break;
         }
-        this.bookDiv.appendChild(this.para);
     }
+    
+
+
     this.remove = document.createElement('button');
     this.remove.textContent='Remove';
     this.remove.addEventListener('click', ()=>{
         myLibrary.map((x)=>{
             if(x.listItem.textContent==this.listItem.textContent){
                 this.listItem.remove(); 
-                myLibrary.splice(myLibrary.indexOf(x), 1)  
+                myLibrary.splice(myLibrary.indexOf(x), 1);
                 console.log(myLibrary);  
             }
         })
@@ -36,7 +43,20 @@ function Book(title, author, pages, read){
     this.bookDiv.appendChild(this.remove);
 }
 
+function AddStatusButton(initial, id){
+    const checkBox = document.createElement('input');
+    checkBox.type='checkbox';
+    checkBox.checked = initial.checked;
+    checkBox.addEventListener('click', ()=>{
+        checkBox.checked?document.getElementById(id).textContent='Read':document.getElementById(id).textContent='Have not read'
+        AddStatusButton(checkBox, id);
+    })
+    document.getElementById(id).appendChild(checkBox);
+
+}                        
+
 function AddForm(){
+    addBookButton.removeEventListener('click', AddForm);
     const form = document.createElement('form');
     const formHeader = document.createElement('h1');
     const header=document.createElement('h2');
@@ -64,7 +84,4 @@ function AddForm(){
     document.querySelector('body').appendChild(form);
 }
 
-addBookButton.addEventListener('click', ()=>{
-    AddForm();
-    addBookButton.removeEventListener('click', true);
-});
+addBookButton.addEventListener('click', AddForm);
