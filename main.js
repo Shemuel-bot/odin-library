@@ -43,6 +43,7 @@ function Book(title, author, pages, read){
     this.bookDiv.appendChild(this.remove);
 }
 
+//this is to add a checkbox to toggle whether you've read it or not
 function AddStatusButton(initial, id){
     const checkBox = document.createElement('input');
     checkBox.type='checkbox';
@@ -63,6 +64,7 @@ function AddForm(){
     formHeader.textContent = 'Adding Books?';
     form.appendChild(formHeader);
     header.textContent='Have you read this?';
+    //for loop is here to create the input fields 
     for(let i=0; i <4; i++){
         const inputs = document.createElement('input');
         form.appendChild(inputs);
@@ -76,6 +78,7 @@ function AddForm(){
     const formSubmitButton = document.createElement('button');
     formSubmitButton.addEventListener('click', ()=>{
             let con = false;
+            //this makes sure the books don't repeat
             myLibrary.map((x)=>{
                 if (x.bookHeader.textContent === document.getElementById('title').value) {
                     con=true;
