@@ -75,8 +75,17 @@ function AddForm(){
     }
     const formSubmitButton = document.createElement('button');
     formSubmitButton.addEventListener('click', ()=>{
-       const newBook = new Book(document.getElementById('title').value, document.getElementById('author').value, document.getElementById('pages').value, document.getElementById('read-check'));
-       myLibrary.push(newBook);
+            let con = false;
+            myLibrary.map((x)=>{
+                if (x.bookHeader.textContent === document.getElementById('title').value) {
+                    con=true;
+                }else{
+                    con=false;
+                }
+             });
+             if(!con){
+            const newBook = new Book(document.getElementById('title').value, document.getElementById('author').value, document.getElementById('pages').value, document.getElementById('read-check'));
+            myLibrary.push(newBook);}
     });
     formSubmitButton.type = 'button';
     formSubmitButton.textContent = 'Add';
