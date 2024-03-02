@@ -26,8 +26,6 @@ function Book(title, author, pages, read){
             this.para.id=title; AddStatusButton(read, title);break;
         }
     }
-    
-
 
     this.remove = document.createElement('button');
     this.remove.textContent='Remove';
@@ -69,26 +67,34 @@ function AddForm(){
         const inputs = document.createElement('input');
         form.appendChild(inputs);
         switch (i) {
-            case 0:inputs.placeholder = 'title...';inputs.id='title';break;
-            case 1:inputs.placeholder='authors name...';inputs.id='author';break;
-            case 2:inputs.placeholder='number pages...';inputs.type='number'; inputs.id='pages';break;
+            case 0:inputs.placeholder = 'title...';inputs.id='title';inputs.required=true;break;
+            case 1:inputs.placeholder='authors name...';inputs.id='author'; inputs.required=true;break;
+            case 2:inputs.placeholder='number pages...';inputs.type='number'; inputs.id='pages';inputs.required=true;break;
             case 3:form.appendChild(header); inputs.type = 'checkbox';inputs.id='read-check';break;
         }
     }
     const formSubmitButton = document.createElement('button');
     formSubmitButton.addEventListener('click', ()=>{
             let con = false;
-            //this makes sure the books don't repeat
-            myLibrary.map((x)=>{
-                if (x.bookHeader.textContent === document.getElementById('title').value) {
-                    con=true;
-                }else{
-                    con=false;
-                }
-             });
-             if(!con){
-            const newBook = new Book(document.getElementById('title').value, document.getElementById('author').value, document.getElementById('pages').value, document.getElementById('read-check'));
-            myLibrary.push(newBook);}
+            let filledOut=false;
+            const inputs = [...document.querySelectorAll('input')];
+            inputs.map((x)=>{
+                const a = inputs[inputs.length - 2];
+                x.checkValidity()?filledOut=true:filledOut=false;
+                console.log(x.checkValidity());
+                if(filledOut&&x===a){
+                    myLibrary.map((x)=>{
+                        if (x.bookHeader.textContent === document.getElementById('title').value) {
+                            con=true;
+                        }else{
+                            con=false;
+                        }
+                     });
+                     if(!con){
+                        const newBook = new Book(document.getElementById('title').value, document.getElementById('author').value, document.getElementById('pages').value, document.getElementById('read-check'));
+                        myLibrary.push(newBook);}
+                }           
+            })
     });
     formSubmitButton.type = 'button';
     formSubmitButton.textContent = 'Add';
